@@ -45,10 +45,14 @@ jobs:
     #     ./gradlew build
     #     ./gradlew sonarqube
 
-    - name: SonarCloud Scan
-      uses: SonarSource/sonarcloud-github-action@master
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # Provided by GitHub, used by the SonarCloud action
-        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }} # Set in your repo's secrets
-        SONAR_PROJECT_KEY: Pankuk0_lab
-        SONAR_ORGANIZATION: Pankuk0
+- name: SonarCloud Scan
+  uses: SonarSource/sonarcloud-github-action@master
+  env:
+    GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # Proporcionado por GitHub, utilizado por la acción de SonarCloud
+    SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }} # Configurado en los secretos de tu repositorio
+  with:
+    args: >
+      -Dsonar.projectKey=Pankuk0_lab
+      -Dsonar.organization=Pankuk0
+      # Añade más parámetros según sea necesario
+
