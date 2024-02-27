@@ -1,0 +1,22 @@
+name: SAST-AlvaroCastillo
+
+on:
+  push:
+    branches:
+      - dev
+  pull_request:
+    branches:
+      - dev
+
+jobs:
+  sonarcloud:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: SonarCloud Scan
+      uses: SonarSource/sonarcloud-github-action@master
+      with:
+        organization: "Pankuk0"
+        token: ${{ secrets.SONAR_TOKEN }}
