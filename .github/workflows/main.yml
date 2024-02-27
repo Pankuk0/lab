@@ -6,7 +6,7 @@ on:
       - dev
   pull_request:
     branches:
-      - main
+      - dev
 
 jobs:
   sonarcloud:
@@ -27,7 +27,7 @@ jobs:
         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
       with:
         args: >
+          -X
           -Dsonar.organization=Pankuk0
           -Dsonar.projectKey=lab
           -Dsonar.sources=.
-
