@@ -53,4 +53,4 @@ jobs:
           args: >
             -Dsonar.projectKey=Pankuk0_lab
             -Dsonar.organization=Pankuk0
-            # Añade más parámetros según sea necesario
+
