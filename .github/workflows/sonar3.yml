@@ -39,6 +39,9 @@ jobs:
       with:
         args: >
           -Dsonar.qualitygate.wait=true
+          -Dsonar.organization=pankuk0
+          -Dsonar.projectKey=Pankuk0_lab
+          -Dsonar.host.url=https://sonarcloud.io/
 
     # Fail the build if quality gate failed
     - name: Fail if Quality Gate failed
