@@ -13,46 +13,44 @@ jobs:
   sonarcloud:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
-      with:
-        # Fetch the entire commit history so that SonarCloud has exact blame information
-        # for issue auto-assignment, and to support PR analysis decoration.
-        fetch-depth: 0
-    
-    # Required if the Java build and analysis are run on different machines.
-    # You can remove it if the Java build and SonarCloud analysis run on the same machine.
-    - name: Cache SonarCloud packages
-      uses: actions/cache@v2
-      with:
-        path: ~/.sonar/cache
-        key: ${{ runner.os }}-sonar
-        restore-keys: ${{ runner.os }}-sonar
+      - uses: actions/checkout@v2
+        with:
+          # Fetch the entire commit history so that SonarCloud has exact blame information
+          # for issue auto-assignment, and to support PR analysis decoration.
+          fetch-depth: 0
+      
+      # Required if the Java build and analysis are run on different machines.
+      # You can remove it if the Java build and SonarCloud analysis run on the same machine.
+      - name: Cache SonarCloud packages
+        uses: actions/cache@v2
+        with:
+          path: ~/.sonar/cache
+          key: ${{ runner.os }}-sonar
+          restore-keys: ${{ runner.os }}-sonar
 
-    # Set up JDK 11 for running the analysis after building
-    - name: Set up JDK 11
-      uses: actions/setup-java@v2
-      with:
-        java-version: '11'
-        distribution: 'adopt'
+      # Set up JDK 11 for running the analysis after building
+      - name: Set up JDK 11
+        uses: actions/setup-java@v2
+        with:
+          java-version: '11'
+          distribution: 'adopt'
 
-    # Add additional steps that handle your project's build system, 
-    # setup the environment, and run the build, for instance:
-    # - name: Build and analyze
-    #   env:
-    #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
-    #     SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}  # Created in SonarCloud.io
-    #   run: |
-    #     ./gradlew build
-    #     ./gradlew sonarqube
+      # Add your build steps here
+      # - name: Build and analyze
+      #   env:
+      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
+      #     SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}  # Created in SonarCloud.io
+      #   run: |
+      #     ./gradlew build
+      #     ./gradlew sonarqube
 
-- name: SonarCloud Scan
-  uses: SonarSource/sonarcloud-github-action@master
-  env:
-    GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # Proporcionado por GitHub, utilizado por la acción de SonarCloud
-    SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }} # Configurado en los secretos de tu repositorio
-  with:
-    args: >
-      -Dsonar.projectKey=Pankuk0_lab
-      -Dsonar.organization=Pankuk0
-      # Añade más parámetros según sea necesario
-
+      - name: SonarCloud Scan
+        uses: SonarSource/sonarcloud-github-action@master
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # Proporcionado por GitHub, utilizado por la acción de SonarCloud
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }} # Configurado en los secretos de tu repositorio
+        with:
+          args: >
+            -Dsonar.projectKey=Pankuk0_lab
+            -Dsonar.organization=Pankuk0
+            # Añade más parámetros según sea necesario
