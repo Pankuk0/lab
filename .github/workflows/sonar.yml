@@ -1,0 +1,38 @@
+on:
+
+  push:
+
+name: Sonar_27022024
+jobs:
+  sonarcloud:
+    runs-on: ubuntu-latest
+    steps:
+    
+    - uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
+        
+    - name: SonarCloud Scan
+      uses: sonarsource/sonarcloud-github-action@master
+      with:
+        projectBaseDir: .
+        args: >
+          -Dsonar.organization=Pankuk0
+          -Dsonar.projectKey=Pankuk0_lab
+          -Dsonar.host.url=https://sonarcloud.io/
+      env:
+        #GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+
+    - name: Dependency Check
+      uses: dependency-check/Dependency-Check_Action@1.1.0
+      with:
+          project: 'Pankuk0_lab'
+          path: '.'
+          format: 'HTML' 
+      
+    - name: Upload Test results
+      uses: actions/upload-artifact@master
+      with:
+        name: Depcheck report
+        path: ${{github.workspace}}/reports
