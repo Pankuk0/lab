@@ -51,4 +51,4 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # Provided by GitHub, used by the SonarCloud action
         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }} # Set in your repo's secrets
         SONAR_PROJECT_KEY: Pankuk0_lab
-        SONAR_ORGANIZATION: PankukO
+        SONAR_ORGANIZATION: Pankuk0
